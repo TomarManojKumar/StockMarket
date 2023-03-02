@@ -32,7 +32,7 @@ addImg('istockphoto-1153657433-612x612.jpg')
 st.title(":blue[Welcome To _Stock_ _Price_ App]\n")
 st.header(":green[See the complete visualization of] :green[_Companies_ _Stocks_]")
 
-# Getting user name
+# Getting user namet
 name = st.text_input(":red[Q : What name do you go by ?] :sunglasses: :").capitalize()
 
 # Selecting button 
@@ -51,9 +51,9 @@ endDate = st.date_input(":red[_Select_ _the_ _End_ _Date_ (YYYY-MM-DD)] : ")
 # Using yfinance lib to get data using API
 tickerSymbol = company.upper()
 tickerData = yf.Ticker(tickerSymbol)
-tickerDF = tickerData.history(period='1d',start= startingDate,end= endDate)
+tickerDF = tickerData.history(period='1mo',start= startingDate,end= endDate)
 
-st.header(f"Complete Stock Analysis of {tickerSymbol}")
+st.header(f":white[Complete Stock Analysis of {tickerSymbol}]")
 st.dataframe(tickerDF,use_container_width=True)
 
 # Defining Columns for better view of 
@@ -64,7 +64,7 @@ with col1:
     st.line_chart(tickerDF.Close)
 
     st.header(f"\n:blue[Divident given by {tickerSymbol}]")
-    st.bar_chart(tickerDF.Dividends)
+    st.bar_chart(tickerDF["Dividends"])
 with col2:
     st.header(f"\n:blue[Closing Volume of {tickerSymbol}]")
     st.area_chart(tickerDF.Volume)
@@ -72,4 +72,3 @@ with col2:
     st.header(f"\n:blue[Stock Split of {tickerSymbol}]")
     st.bar_chart(tickerDF["Stock Splits"])
 
-    
